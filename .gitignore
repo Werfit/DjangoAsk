@@ -1,0 +1,13 @@
+# Env
+env/
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# DB
+db.sqlite3
+
+# Python
+*/migrations/
