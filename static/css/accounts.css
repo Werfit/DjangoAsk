@@ -1,0 +1,13 @@
+body {
+    background: url('../img/papyrus.png');
+}
+
+.logo a {
+	color: rgba(0, 0, 0, 1);
+    font-family: 'Dancing Script', cursive;
+}
+
+.logo a:hover,
+.logo a:active {
+	text-decoration: none;
+}

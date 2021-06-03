@@ -1,0 +1,32 @@
+{% load form_tags widget_tweaks %}
+
+{% if form.non_field_errors %}
+    <div class="alert alert-danger">
+        <ul class="list-group list-group-flush">
+            {% for error in form.non_field_errors %}
+                <li class="list-group-item list-group-item-danger">{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+{% for field in form %}
+    <div class="mb-3">
+        {{ field|add_label_class:"form-label" }}
+        {% render_field field class=field|input_class %}
+
+        {% if field.errors %}
+            <div class="invalid-feedback">
+                {% for error in field.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if field.help_text %}
+            <small class="form-text text-muted">
+                {{ field.help_text|safe }}
+            </small>
+        {% endif %}
+    </div>
+{% endfor %}

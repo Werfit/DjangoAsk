@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item">
+        <a href="{% url 'home' %}">Home</a>
+    </li>
+    <li class="breadcrumb-item active">Profile</li>
+{% endblock %}
+
+{% block content %}
+    <form method="POST" novalidate>
+        {% csrf_token %}
+        {% include 'includes/form.html' %}
+        <button class="btn btn-success" role="button">Save</button>
+    </form>
+{% endblock %}
