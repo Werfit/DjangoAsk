@@ -1,6 +1,6 @@
 {% if questions %}
     {% for question in questions %}
-        <tr class="align-middle">
+        <tr class="align-middle infinite-item">
             <td>
                 {% if question.is_anonymous %}
                     Anonymous
@@ -20,7 +20,7 @@
     {% endfor %}
 {% else %}
     <tr>
-        <td class="text-center" colspan="3">
+        <td class="text-center" colspan="4">
             No questions yet
         </td>
     </tr>

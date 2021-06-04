@@ -9,6 +9,7 @@
 {% endblock %}
 
 {% block content %}
+    <a href="{% url 'download_pdf' %}" class="btn btn-outline-primary mb-4" role="button">Download PDF</a>
     <table class="table">
         <thead>
             <tr>
@@ -18,12 +19,21 @@
                 <th scope="col"></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="infinite-container">
             {% include 'includes/questions.html' %}
         </tbody>
     </table>
+
+    {% if questions.has_next %}
+        <a href="?page={{ questions.next_page_number }}" class="infinite-more-link" style="display: none;">More</a>
+    {% endif %}
+
+    <div class="alert alert-info loader" role="alert" style="display: none;">Loading...</div>
 {% endblock %}
 
 {% block scripts %}
+    <script src="{% static 'js/libs/noframework.waypoints.min.js' %}"></script>
+    <script src="{% static 'js/libs/infinite.min.js' %}"></script>
+
     <script src="{% static 'js/profile.js' %}"></script>
 {% endblock %}

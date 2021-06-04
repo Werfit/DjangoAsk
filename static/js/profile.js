@@ -13,3 +13,9 @@ $(document).on('submit', 'form', e => {
         }
     })
 })
+
+const infinite = new Waypoint.Infinite({
+    element: $('.infinite-container')[0],
+    onBeforePageLoad: () => $('.loader').show(),
+    onAfterPageLoad: () => $('.loader').hide()
+})

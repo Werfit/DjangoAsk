@@ -7,5 +7,6 @@ urlpatterns = [
     path('profile', views.profile, name='profile'),
     path('users/', views.find_user, name='search'),
     path('users/<str:pk>/', views.user_profile, name='user_profile'),
-    path('questions/<int:pk>/delete/', views.delete_question, name='delete_question')
+    path('questions/<int:pk>/delete/', views.delete_question, name='delete_question'),
+    path('profile/download/', views.download_pdf, name='download_pdf')
 ]

@@ -2,7 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.files.storage import FileSystemStorage
+
+from weasyprint import HTML, CSS
+from datetime import datetime
 
 from .models import Question
 from .forms import QuestionForm, SearchForm
@@ -15,7 +20,17 @@ def index(request):
 @login_required
 def profile(request):
     user = request.user
-    questions = Question.objects.filter(target=user)
+    questions_list = Question.objects.filter(target=user)
+    page = request.GET.get('page', 1)
+    paginator = Paginator(questions_list, 10)
+
+    try:
+        questions = paginator.page(page)
+    except PageNotAnInteger:
+        questions = paginator.page(1)
+    except EmptyPage:
+        questions = paginator.page(paginator.num_pages)
+
     return render(request, 'profile.html', {'questions': questions})
 
 
@@ -79,3 +94,27 @@ def delete_question(request, pk=None):
         data['html'] = render_to_string('includes/questions.html', {'questions': questions}, request=request)
 
     return JsonResponse(data)
+
+
+# TODO: Pagination
+@login_required
+def download_pdf(request):
+    user = request.user
+    questions = Question.objects.filter(target=user)
+
+    html_string = render_to_string('pdf/pdf_template.html', {'questions': questions}, request=request)
+
+    html = HTML(string=html_string)
+    bootstrap_css = CSS(filename='static/css/libs/bootstrap.min.css')
+    fonts_css = CSS(filename='static/css/pdf.css')
+
+    file_name = f'{user.username}-{datetime.now().strftime("%m-%d-%Y-%H-%M-%S")}'
+    html.write_pdf(target=f'/tmp/{file_name}', stylesheets=[bootstrap_css, fonts_css])
+
+    fs = FileSystemStorage('/tmp')
+    with fs.open(file_name) as pdf:
+        response = HttpResponse(pdf, content_type='application/pdf')
+        response['Content-Disposition'] = f'attachment; filename={file_name}'
+        return response
+
+    return redirect('profile')

@@ -12,9 +12,10 @@
         {% endblock %}
     </title>
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com"> -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet"> -->
 
+    <!-- <link rel="attachment" href="{% static 'css/libs/bootstrap.min.css' %}" /> -->
     <link rel="stylesheet" href="{% static 'css/libs/bootstrap.min.css' %}" />
     {% block styles %}{% endblock %}
 </head>
@@ -33,9 +34,6 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'search' %}">Search</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Pricing</a>
                         </li>
                     </ul>
                     {% if user.is_authenticated %}

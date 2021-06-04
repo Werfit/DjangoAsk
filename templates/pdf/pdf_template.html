@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="container">
+        <ul class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">{{ user.username }}</li>
+        </ul>
+
+        <table class="table">
+            <thead>
+                <th scope="col">Username</th>
+                <th scope="col">Question</th>
+                <th scope="col">Date</th>
+            </thead>
+            <tbody>
+                {% if questions %}
+                    {% for question in questions %}
+                        <tr class="align-middle infinite-item">
+                            <td>
+                                {% if question.is_anonymous %}
+                                    Anonymous
+                                {% else %}
+                                    {{ question.author.username }}
+                                {% endif %}
+                            </td>
+                            <td>{{ question.text }}</td>
+                            <td>{{ question.created_at }}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td class="text-center" colspan="4">
+                            No questions yet
+                        </td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
