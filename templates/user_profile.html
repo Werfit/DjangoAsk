@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load user_utils %}
+
+{% block title %}
+    {% if target %}
+        {{ target.username }} - {{ block.super }}
+    {% else %}
+        User Not Found
+    {% endif %}
+{% endblock %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item">
+        <a href="{% url 'home' %}">Home</a>
+    </li>
+    <li class="breadcrumb-item">
+        <a href="{% url 'search' %}">Search</a>
+    </li>
+    <li class="breadcrumb-item active">User Profile</li>
+{% endblock %}
+
+{% block content %}
+    {% if target %}
+        <div class="card mb-4">
+            <div class="card-body">
+                {% if target.last_name or target.first_name %}
+                    <h4 class="card-title">{{ target.last_name }} {{ target.first_name }}</h4>
+                {% else %}
+                    <h4 class="card-title">@{{ target.username }}</h4>
+                {% endif %}
+                <h6 class="card-subtitle text-muted">Questions: {{ target.target.all|count }}</h6>
+            </div>
+        </div>
+        <form method="POST" novalidate>
+            {% csrf_token %}
+            {% include 'includes/form.html' %}
+            <button class="btn btn-success" role="button">Ask a question</button>
+        </form>
+    {% else %}
+        <div class="alert alert-danger" role="alert">
+            User not found!
+        </div>
+    {% endif %}
+{% endblock %}

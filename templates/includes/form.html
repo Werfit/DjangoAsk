@@ -12,8 +12,15 @@
 
 {% for field in form %}
     <div class="mb-3">
-        {{ field|add_label_class:"form-label" }}
-        {% render_field field class=field|input_class %}
+        
+        {% if field|is_checkbox %}
+            {% render_field field class=field|input_class %}
+            {% render_field field|add_label_class:"form-check-label" %}
+        {% else %}
+            {% render_field field|add_label_class:"form-label" %}
+            {% render_field field class=field|input_class %}
+        {% endif %}
+        
 
         {% if field.errors %}
             <div class="invalid-feedback">

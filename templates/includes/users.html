@@ -1,0 +1,10 @@
+{% load user_utils %}
+
+{% for u in users %}
+    <tr>
+        <td>
+            <a href="{% url 'user_profile' pk=u.username %}">{{ u.username }}</a>
+        </td>
+        <td>{{ u.target.all|count }}</td>
+    </tr>
+{% endfor %}

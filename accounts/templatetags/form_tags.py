@@ -16,4 +16,14 @@ def input_class(field):
             css_class = 'is-invalid'
         elif field_type(field) != 'PasswordInput':
             css_class = 'is-valid'
-    return f'form-control {css_class}'
+
+    css_widget_class = 'form-control'
+    if field_type(field) == 'CheckboxInput':
+        css_widget_class = 'form-check-input'
+    return f'{css_widget_class} {css_class}'
+
+
+@register.filter
+def is_checkbox(field):
+    return field_type(field) == 'CheckboxInput'
+

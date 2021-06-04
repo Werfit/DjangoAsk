@@ -31,4 +31,5 @@ def update_user(request):
     else:
         form = UpdateUserForm(instance=user)
 
-    return render(request, 'accounts/profile.html', {'form': form})
+    return render(request, 'accounts/settings.html', {'form': form})
+

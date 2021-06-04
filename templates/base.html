@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/libs/bootstrap.min.css' %}" />
     {% block styles %}{% endblock %}
 </head>
 <body>
@@ -29,10 +29,10 @@
                 <div class="collapse navbar-collapse" id="mainMenu">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                            <a class="nav-link"href="{% url 'home' %}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Features</a>
+                            <a class="nav-link" href="{% url 'search' %}">Search</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Pricing</a>
@@ -44,7 +44,9 @@
                                 {{ user.username }}
                             </span>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="{% url 'profile' %}">Account</a></li>
+                                <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+                                <div class="dropdown-divider"></div>
+                                <li><a class="dropdown-item" href="{% url 'settings' %}">Settings</a></li>
                                 <li><a class="dropdown-item" href="{% url 'password_change' %}">Change password</a></li>
                                 <div class="dropdown-divider"></div>
                                 <li><a class="dropdown-item" href="{% url 'logout' %}">Log out</a></li>
@@ -69,7 +71,8 @@
         </div>
     {% endblock %}
 
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/libs/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/libs/jquery.min.js' %}"></script>
     {% block scripts %}{% endblock %}
 </body>
 </html>

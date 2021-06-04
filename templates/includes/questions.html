@@ -1,0 +1,27 @@
+{% if questions %}
+    {% for question in questions %}
+        <tr class="align-middle">
+            <td>
+                {% if question.is_anonymous %}
+                    Anonymous
+                {% else %}
+                    {{ question.author.username }}
+                {% endif %}
+            </td>
+            <td>{{ question.text }}</td>
+            <td>{{ question.created_at }}</td>
+            <td>
+                <form action="{% url 'delete_question' pk=question.pk %}" method="POST">
+                    {% csrf_token %}
+                    <button class="btn btn-danger btn-lg">D</button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+{% else %}
+    <tr>
+        <td class="text-center" colspan="3">
+            No questions yet
+        </td>
+    </tr>
+{% endif %}
