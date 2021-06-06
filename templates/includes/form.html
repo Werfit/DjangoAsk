@@ -12,10 +12,38 @@
 
 {% for field in form %}
     <div class="mb-3">
-        
         {% if field|is_checkbox %}
             {% render_field field class=field|input_class %}
             {% render_field field|add_label_class:"form-check-label" %}
+        {% else %}
+            {% render_field field|add_label_class:"form-label" %}
+            {% render_field field class=field|input_class %}
+        {% endif %}
+        
+
+        {% if field.errors %}
+            <div class="invalid-feedback">
+                {% for error in field.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if field.help_text %}
+            <small class="form-text text-muted">
+                {{ field.help_text|safe }}
+            </small>
+        {% endif %}
+    </div>
+{% endfor %}
+
+{% for field in extra %}
+    <div class="{% if field|field_type != 'floatfield' %} mb-3 {% endif %}">
+        {% if field|is_checkbox %}
+            {% render_field field class=field|input_class %}
+            {% render_field field|add_label_class:"form-check-label" %}
+        {% elif field|field_type == 'floatfield' %}
+            {% render_field field %}
         {% else %}
             {% render_field field|add_label_class:"form-label" %}
             {% render_field field class=field|input_class %}

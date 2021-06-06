@@ -20,7 +20,7 @@ def index(request):
 @login_required
 def profile(request):
     user = request.user
-    questions_list = Question.objects.filter(target=user)
+    questions_list = Question.objects.filter(target=user).order_by('-created_at')
     page = request.GET.get('page', 1)
     paginator = Paginator(questions_list, 10)
 
@@ -100,7 +100,7 @@ def delete_question(request, pk=None):
 @login_required
 def download_pdf(request):
     user = request.user
-    questions = Question.objects.filter(target=user)
+    questions = Question.objects.filter(target=user).order_by('-created_at')
 
     html_string = render_to_string('pdf/pdf_template.html', {'questions': questions}, request=request)
 

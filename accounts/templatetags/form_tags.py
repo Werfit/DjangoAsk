@@ -23,6 +23,7 @@ def input_class(field):
     return f'{css_widget_class} {css_class}'
 
 
+# TODO: Replace it in templates
 @register.filter
 def is_checkbox(field):
     return field_type(field) == 'CheckboxInput'

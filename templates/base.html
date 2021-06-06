@@ -12,10 +12,9 @@
         {% endblock %}
     </title>
 
-    <!-- <link rel="preconnect" href="https://fonts.gstatic.com"> -->
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet"> -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 
-    <!-- <link rel="attachment" href="{% static 'css/libs/bootstrap.min.css' %}" /> -->
     <link rel="stylesheet" href="{% static 'css/libs/bootstrap.min.css' %}" />
     {% block styles %}{% endblock %}
 </head>
@@ -39,6 +38,7 @@
                     {% if user.is_authenticated %}
                         <div class="nav-item dropdown">
                             <span class="navbar-text dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="/media/{{ user.profile.avatar }}" class="img-thumbnail" width="50">
                                 {{ user.username }}
                             </span>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
 
-from .forms import SignUpForm, UpdateUserForm
+from .forms import SignUpForm, UpdateUserForm, UpdateUserProfileForm
 
 
 def signup(request):
@@ -25,11 +25,14 @@ def update_user(request):
 
     if request.method == 'POST':
         form = UpdateUserForm(request.POST, instance=user)
+        avatar_form = UpdateUserProfileForm(request.POST, request.FILES, instance=user.profile)
 
-        if form.is_valid():
+        if form.is_valid() and avatar_form.is_valid():
             form.save()
+            avatar_form.save()
     else:
         form = UpdateUserForm(instance=user)
+        avatar_form = UpdateUserProfileForm(instance=user.profile)
 
-    return render(request, 'accounts/settings.html', {'form': form})
+    return render(request, 'accounts/settings.html', {'form': form, 'extra': avatar_form})
 

@@ -26,8 +26,8 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG')
 
+# ALLOWED_HOSTS = ['192.168.88.77']
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -70,6 +70,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media'
             ],
         },
     },
@@ -141,3 +142,8 @@ LOGOUT_REDIRECT_URL = 'home'
 # Password Reset
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Media
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
