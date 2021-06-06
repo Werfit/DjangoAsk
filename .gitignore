@@ -15,6 +15,7 @@ db.sqlite3
 
 # Others
 */.DS_Store
+.DS_Store
 
 # Project
 media/
