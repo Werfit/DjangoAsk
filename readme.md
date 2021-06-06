@@ -3,6 +3,12 @@
 Firstly, install all python dependencies:
 <pre>pip install -r requirements.txt</pre>
 
+Set your environment:
+```
+SECRET_KEY=(your secret key)
+DEBUG=True
+```
+
 If you are lucky, everything you need is to make migrations and to run a server:
 <pre>python manage.py makemigrations</pre>
 <pre>python manage.py migrate</pre>
